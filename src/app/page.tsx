@@ -839,6 +839,65 @@ export default function Home() {
         </div>
       </section>
 
+      {/* The Maeve Experience */}
+      <section className="py-20 bg-charcoal overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-gold text-xs tracking-luxe uppercase font-body font-light mb-4">
+              More Than a Salon
+            </p>
+            <h2 className="text-4xl md:text-5xl font-heading font-light text-white mb-4">
+              The Maeve{" "}
+              <span style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontStyle: "italic" }} className="text-gold">
+                Experience
+              </span>
+            </h2>
+            <p className="text-white/50 text-sm font-body font-light max-w-lg mx-auto">
+              Where artistry meets warmth. Step inside and feel at home.
+            </p>
+          </div>
+
+          {/* Masonry-style grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
+            {/* Tall left */}
+            <div className="row-span-2 relative overflow-hidden group">
+              <div className="relative h-full min-h-[300px] md:min-h-[500px]">
+                <Image src="/staff.png" alt="Maeve team" fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="25vw" />
+              </div>
+            </div>
+            {/* Top row */}
+            <div className="relative overflow-hidden group aspect-square">
+              <Image src="/helping.png" alt="Stylist with client" fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="25vw" />
+            </div>
+            <div className="relative overflow-hidden group aspect-square">
+              <Image src="/color-bar.png" alt="Color bar" fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="25vw" />
+            </div>
+            {/* Tall right */}
+            <div className="row-span-2 relative overflow-hidden group">
+              <div className="relative h-full min-h-[300px] md:min-h-[500px]">
+                <Image src="/staff2.png" alt="Maeve stylists" fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="25vw" />
+              </div>
+            </div>
+            {/* Bottom row */}
+            <div className="relative overflow-hidden group aspect-square">
+              <Image src="/helping2.png" alt="Hair styling session" fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="25vw" />
+            </div>
+            <div className="relative overflow-hidden group aspect-square">
+              <Image src="/salon1.png" alt="Salon interior" fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="25vw" />
+            </div>
+          </div>
+
+          {/* Second row - horizontal scroll of more photos */}
+          <div className="flex gap-2 md:gap-3 mt-2 md:mt-3 overflow-x-auto scrollbar-hide" style={{ scrollbarWidth: "none" }}>
+            {["/staff3.png", "/helping3.png", "/color-bar2.png", "/staff4.png", "/staff5.png", "/staff6.png", "/staff7.png", "/staff8.png", "/staff9.png", "/hair-appoint.png"].map((img, i) => (
+              <div key={i} className="relative shrink-0 w-48 md:w-56 aspect-[4/3] overflow-hidden group">
+                <Image src={img} alt={`Maeve experience ${i + 1}`} fill className="object-cover group-hover:scale-105 transition-transform duration-700" sizes="224px" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* See Our Work - Horizontal Scroll */}
       <SeeOurWorkSection />
 
