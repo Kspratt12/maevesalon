@@ -32,19 +32,19 @@ const owners: TeamMember[] = [
 ];
 
 const stylists: TeamMember[] = [
-  { name: "Tristan", image: "/tristian.png" },
-  { name: "Brittany", image: "/brittany.png" },
-  { name: "Jo", image: "/jo.png" },
-  { name: "Meghan", image: "/meghan.png" },
-  { name: "Jess", image: "/jess.png" },
-  { name: "Britt", image: "/britt.png" },
-  { name: "Carson", image: "/carson.png" },
-  { name: "Hannah", image: "/hannah.png" },
-  { name: "Gracie", image: "/grace.png" },
-  { name: "Lindsey", image: "/lindsey.png" },
-  { name: "Sucel", image: "/sucel.png" },
-  { name: "Alexa", image: "/alexis.png" },
-  { name: "Anna", image: "/anna.png" },
+  { name: "Tristan", image: "/tristian.png", instagram: "https://www.instagram.com/tristanmoorer.hair/" },
+  { name: "Brittany M.", image: "/brittany.png", instagram: "https://www.instagram.com/brittanymurphyhair/" },
+  { name: "Jo", image: "/jo.png", instagram: "https://www.instagram.com/joshairjournal/" },
+  { name: "Meghan", image: "/meghan.png", instagram: "https://www.instagram.com/meghanatmaeve/" },
+  { name: "Jess", image: "/jess.png", instagram: "https://www.instagram.com/jessicaspeicherhair/" },
+  { name: "Brittany S.", image: "/britt.png", instagram: "https://www.instagram.com/hairbybrittanysiebelink/" },
+  { name: "Carson", image: "/carson.png", instagram: "https://www.instagram.com/stylesbycarss/" },
+  { name: "Hannah", image: "/hannah.png", instagram: "https://www.instagram.com/hannahcayhair/" },
+  { name: "Gracie", image: "/grace.png", instagram: "https://www.instagram.com/hannahcayhair/" },
+  { name: "Lindsey", image: "/lindsey.png", instagram: "https://www.instagram.com/madisongrace.beauty/" },
+  { name: "Sucel", image: "/sucel.png", instagram: "https://www.instagram.com/bespoke_hairby_sucel/" },
+  { name: "Alexa", image: "/alexis.png", instagram: "https://www.instagram.com/southern_blondie_/" },
+  { name: "Anna", image: "/anna.png", instagram: "https://www.instagram.com/annadblondin/" },
 ];
 
 function useInView(threshold = 0.1) {
