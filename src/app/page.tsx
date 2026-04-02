@@ -356,6 +356,80 @@ function VideoCard({ src, stylist }: { src: string; stylist: string }) {
   );
 }
 
+function SeeOurWorkSection() {
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const scroll = (direction: "left" | "right") => {
+    const container = scrollRef.current;
+    if (!container) return;
+    const scrollAmount = direction === "left" ? -320 : 320;
+    container.scrollBy({ left: scrollAmount, behavior: "smooth" });
+  };
+
+  return (
+    <section className="py-24 bg-cream overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <p className="text-gold text-xs tracking-luxe uppercase font-body font-light mb-4">
+            Our Work
+          </p>
+          <h2 className="text-4xl md:text-5xl font-heading font-light text-charcoal">
+            See Our Work
+          </h2>
+          <p className="text-warm-gray text-sm font-body font-light mt-4">
+            Scroll to explore our latest styles and transformations
+          </p>
+        </div>
+      </div>
+      <div className="relative">
+        {/* Left Arrow */}
+        <button
+          onClick={() => scroll("left")}
+          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-gold hover:text-white text-charcoal transition-all duration-300"
+          aria-label="Scroll left"
+        >
+          <ArrowRight size={18} className="rotate-180" />
+        </button>
+
+        {/* Right Arrow */}
+        <button
+          onClick={() => scroll("right")}
+          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/90 shadow-lg flex items-center justify-center hover:bg-gold hover:text-white text-charcoal transition-all duration-300"
+          aria-label="Scroll right"
+        >
+          <ArrowRight size={18} />
+        </button>
+
+        <div
+          ref={scrollRef}
+          className="flex gap-3 overflow-x-auto pb-6 px-12 sm:px-16 snap-x snap-mandatory scrollbar-hide"
+          style={{ scrollbarWidth: "none" }}
+        >
+          {Array.from({ length: 25 }, (_, i) => (
+            <div
+              key={i}
+              className="relative shrink-0 w-56 md:w-64 aspect-[3/4] overflow-hidden snap-center group rounded-sm"
+            >
+              <Image
+                src={`/hair-pic${i + 1}.png`}
+                alt={`Hair style ${i + 1}`}
+                fill
+                className="object-cover group-hover:scale-105 transition-transform duration-700"
+                sizes="256px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
+            </div>
+          ))}
+        </div>
+
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-6 w-12 bg-gradient-to-r from-cream to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-6 w-12 bg-gradient-to-l from-cream to-transparent pointer-events-none" />
+      </div>
+    </section>
+  );
+}
+
 function BookingWidget() {
   const [activeTab, setActiveTab] = useState("Cut & Style");
   const [selectedService, setSelectedService] = useState("");
@@ -369,7 +443,7 @@ function BookingWidget() {
   };
 
   return (
-    <section className="relative">
+    <section className="relative overflow-hidden">
       {/* Background image with overlay */}
       <div className="absolute inset-0">
         <Image
@@ -691,43 +765,7 @@ export default function Home() {
       </section>
 
       {/* See Our Work - Horizontal Scroll */}
-      <section className="py-24 bg-cream overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-gold text-xs tracking-luxe uppercase font-body font-light mb-4">
-              Our Work
-            </p>
-            <h2 className="text-4xl md:text-5xl font-heading font-light text-charcoal">
-              See Our Work
-            </h2>
-            <p className="text-warm-gray text-sm font-body font-light mt-4">
-              Scroll to explore our latest styles and transformations
-            </p>
-          </div>
-        </div>
-        <div className="relative">
-          <div className="flex gap-3 overflow-x-auto pb-6 px-4 sm:px-6 lg:px-8 snap-x snap-mandatory scrollbar-hide" style={{ scrollbarWidth: "none", msOverflowStyle: "none", WebkitOverflowScrolling: "touch" }}>
-            {Array.from({ length: 25 }, (_, i) => (
-              <div
-                key={i}
-                className="relative shrink-0 w-56 md:w-64 aspect-[3/4] overflow-hidden snap-center group rounded-sm"
-              >
-                <Image
-                  src={`/hair-pic${i + 1}.png`}
-                  alt={`Hair style ${i + 1}`}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-700"
-                  sizes="256px"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
-              </div>
-            ))}
-          </div>
-          {/* Fade edges */}
-          <div className="absolute left-0 top-0 bottom-6 w-8 bg-gradient-to-r from-cream to-transparent pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-6 w-8 bg-gradient-to-l from-cream to-transparent pointer-events-none" />
-        </div>
-      </section>
+      <SeeOurWorkSection />
 
       {/* Hours Section */}
       <section className="py-24 bg-white">
