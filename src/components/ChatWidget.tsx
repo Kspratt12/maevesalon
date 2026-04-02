@@ -22,17 +22,20 @@ KEY INFO:
 - Booking: https://www.phorest.com/salon/maevesalonandcolorbar/book/service-selection
 
 SERVICES & PRICING:
-- Haircuts: $50-$90 depending on stylist
+- Women's Cut: from $60
+- Men's Cut: from $45
 - Re-Touch & Style: from $105
 - Full Color & Style: from $155
 - Partial Dimensional & Style: from $140
 - Full Dimensional & Style: from $155
-- Balayage & Style: from $245
+- Partial Balayage & Style: from $195
+- Full Balayage & Style: from $245
 - Full Babylights & Style: from $225
 - Kerasilk Smoothing Treatment: from $350
 - Extensions: Upon Consultation
 - Blowout: from $35-$55
 - Special Occasion Updo: from $100
+- Waxing: Eyebrow $22, Lip $15, Full Face $40
 
 NAIL SERVICES (Nails by Tess):
 - Short and Sweet Mani: $15
@@ -74,7 +77,7 @@ function getDemoResponse(input: string): string {
   }
 
   if (lower.includes("price") || lower.includes("cost") || lower.includes("how much")) {
-    return "Here's an overview of our pricing:\n\n**Hair Services:**\n- Haircuts: $50-$90\n- Re-Touch & Style: from $105\n- Full Color & Style: from $155\n- Balayage & Style: from $245\n- Smoothing Treatment: from $350\n\n**Nails by Tess:**\n- Manicures: from $15\n- Gel Services: from $45\n- Acrylic Full Set: from $55\n\nPrices vary by stylist and service complexity. Would you like details on a specific service?";
+    return "Here's an overview of our pricing:\n\n**Hair Services:**\n- Women's Cut: from $60\n- Re-Touch & Style: from $105\n- Full Color & Style: from $155\n- Full Balayage & Style: from $245\n- Smoothing Treatment: from $350\n\n**Nails by Tess:**\n- Manicures: from $15\n- Gel Services: from $55\n- Acrylic Full Set: from $55\n\nPrices vary by stylist and service complexity. Would you like details on a specific service?";
   }
 
   if (lower.includes("color") || lower.includes("highlight") || lower.includes("balayage") || lower.includes("blonde")) {
@@ -82,7 +85,7 @@ function getDemoResponse(input: string): string {
   }
 
   if (lower.includes("cut") || lower.includes("haircut")) {
-    return "Our haircuts range from $50-$90 depending on the stylist. We also offer:\n\n- Men's Cut: from $45\n- Blowout Style: from $35-$55\n- Bang Trim: complimentary with select services\n\nWould you like to see which stylist is available?";
+    return "Our cuts and styling services:\n\n- **Women's Cut:** from $60\n- **Men's Cut:** from $45\n- **Blowout Style:** from $35-$55\n- **Special Occasion Updo:** from $100\n- **Bang Trim:** complimentary with select services\n\nWould you like to see which stylist is available?";
   }
 
   if (lower.includes("nail") || lower.includes("mani") || lower.includes("pedi") || lower.includes("tess") || lower.includes("acrylic") || lower.includes("gel")) {

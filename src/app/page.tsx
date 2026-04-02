@@ -68,7 +68,7 @@ const serviceCategories: Record<string, { name: string; price: string }[]> = {
   ],
   "Updo": [
     { name: "Special Occasion Updo", price: "from $100" },
-    { name: "Bridal Trial", price: "Free Consult" },
+    { name: "Bridal Consultation", price: "Free" },
   ],
   "Nails": [
     { name: "Short and Sweet Mani", price: "from $15" },
