@@ -78,6 +78,140 @@ const serviceCategories: Record<string, { name: string; price: string }[]> = {
   ],
 };
 
+const testimonials = [
+  {
+    name: "Haylee Marbley",
+    stars: 5,
+    text: "I asked Loren to blend in my greys and give me a little warmth and she delivered! I entrusted her with my virgin hair and was not disappointed. Her foiling technique resulted in a super seamless blend and the subtle results are just my style.",
+    image: "/hayley-marbey-review.png",
+    stylist: "Loren",
+  },
+  {
+    name: "Sarah Moreland",
+    stars: 5,
+    text: "Jessica has been doing my hair for 2+ years and never disappoints. She's a pro at doing balayage so it grows out beautifully and seamlessly. Great atmosphere at the salon. I've moved further away but will continue to come to her as she always slays!",
+    stylist: "Jessica",
+    service: "Balayage",
+  },
+  {
+    name: "Nikki Moser",
+    stars: 5,
+    text: "The salon was very clean and beautiful and the staff was great! First time seeing Lindsey and she was amazing! Was a little nervous about a new style and she not only gave me exactly what I was looking for but she was honest, super sweet, and so knowledgeable. 10/10",
+    stylist: "Lindsey",
+    service: "Haircut",
+  },
+  {
+    name: "Christeen Butler",
+    stars: 5,
+    text: "Anna did a great job on my hair cut; she is very friendly, listens to what you want, and pays great attention to detail. They just opened up a nail room so you can get your hair and nails done in the same place! Tess is very friendly, experienced, and does beautiful nail art.",
+    image: "/Christeen-Butler-review1.png",
+    stylist: "Anna & Tess",
+  },
+  {
+    name: "Paige Nemec",
+    stars: 5,
+    text: "Brittany did an excellent job with my hair. I love it! She was friendly and professional. I would recommend her to anyone looking for a new hairstylist.",
+    stylist: "Brittany",
+    service: "Highlights & Cut",
+  },
+  {
+    name: "L Henkiel",
+    stars: 5,
+    text: "This was my first visit recommended by a couple of ladies in my neighborhood. Gracie was all that she was said to be and more. I am very happy with my new doo, and will definitely be back. Thank you Gracie for making me feel so comfortable.",
+    stylist: "Gracie",
+    service: "Color & Cut",
+  },
+];
+
+function TestimonialsSection() {
+  const section = useInView(0.05);
+  return (
+    <section className="py-24 bg-white overflow-hidden">
+      <div
+        ref={section.ref}
+        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-1000 ${
+          section.inView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
+        }`}
+      >
+        <div className="text-center mb-14">
+          <p className="text-gold text-xs tracking-luxe uppercase font-body font-light mb-4">
+            What Our Clients Say
+          </p>
+          <h2 className="text-4xl md:text-5xl font-heading font-light text-charcoal mb-4">
+            Client{" "}
+            <span style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontStyle: "italic" }} className="text-gold">
+              Love
+            </span>
+          </h2>
+          <div className="flex items-center justify-center gap-2 mt-4">
+            <div className="flex gap-0.5">
+              {[1,2,3,4,5].map((i) => (
+                <svg key={i} viewBox="0 0 24 24" width="20" height="20" fill="#c9a96e">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              ))}
+            </div>
+            <span className="text-sm font-body font-medium text-charcoal ml-1">4.9</span>
+            <span className="text-xs font-body font-light text-warm-gray">/ 125+ reviews</span>
+          </div>
+        </div>
+
+        {/* Scrolling testimonial cards */}
+        <div className="flex gap-5 overflow-x-auto pb-4 snap-x snap-mandatory scrollbar-hide" style={{ scrollbarWidth: "none" }}>
+          {testimonials.map((t, i) => (
+            <div
+              key={i}
+              className="shrink-0 w-80 sm:w-96 bg-cream snap-center flex flex-col"
+            >
+              {/* Review photo if available */}
+              {t.image && (
+                <div className="relative h-48 overflow-hidden">
+                  <Image src={t.image} alt={`${t.name} review`} fill className="object-cover" sizes="384px" />
+                </div>
+              )}
+              <div className="p-7 flex-1 flex flex-col">
+                <div className="flex gap-0.5 mb-3">
+                  {Array.from({ length: t.stars }, (_, j) => (
+                    <svg key={j} viewBox="0 0 24 24" width="14" height="14" fill="#c9a96e">
+                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                    </svg>
+                  ))}
+                </div>
+                <p className="text-sm font-heading font-light text-charcoal/80 leading-relaxed mb-5 italic flex-1">
+                  &ldquo;{t.text}&rdquo;
+                </p>
+                <div>
+                  <p className="text-xs font-body font-medium text-charcoal tracking-wide">
+                    {t.name}
+                  </p>
+                  {(t.stylist || t.service) && (
+                    <p className="text-[10px] font-body font-light text-warm-gray mt-1">
+                      {t.stylist && <>Stylist: <span className="text-gold">{t.stylist}</span></>}
+                      {t.stylist && t.service && <> &middot; </>}
+                      {t.service && <>{t.service}</>}
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center mt-8">
+          <a
+            href="https://www.google.com/maps/place/Maeve+Salon+and+Color+Bar/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs font-body font-light text-warm-gray hover:text-gold transition-colors"
+          >
+            Read all reviews on Google
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 const faqs = [
   {
     q: "Do I need a consultation before my first visit?",
@@ -443,6 +577,9 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {/* Testimonials */}
+      <TestimonialsSection />
 
       {/* Salon Gallery */}
       <section className="py-24 bg-cream">
