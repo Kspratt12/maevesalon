@@ -244,46 +244,31 @@ export default function ChatWidget() {
 
   return (
     <>
-      {/* Chat Button - hidden on mobile when open */}
-      {!isOpen && (
-        <button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-5 right-5 z-30 w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg flex items-center justify-center bg-gold hover:bg-gold-dark transition-all duration-300"
-          aria-label="Open chat"
-        >
-          <MessageCircle size={20} className="text-white" />
-        </button>
-      )}
-      {/* Desktop only - close button replaces chat button */}
-      {isOpen && (
-        <button
-          onClick={() => setIsOpen(false)}
-          className="hidden sm:flex fixed bottom-5 right-5 z-30 w-14 h-14 rounded-full shadow-lg items-center justify-center bg-gold-dark transition-all duration-300"
-          aria-label="Close chat"
-        >
-          <X size={20} className="text-white" />
-        </button>
-      )}
+      {/* Chat Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`fixed bottom-5 right-5 z-30 w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
+          isOpen ? "bg-gold-dark" : "bg-gold hover:bg-gold-dark"
+        }`}
+        aria-label={isOpen ? "Close chat" : "Open chat"}
+      >
+        {isOpen ? <X size={20} className="text-white" /> : <MessageCircle size={20} className="text-white" />}
+      </button>
 
       {/* Chat Window - fullscreen on mobile, card on desktop */}
       {isOpen && (
-        <div className="fixed inset-0 sm:inset-auto sm:bottom-20 sm:right-5 z-[60] sm:z-30 sm:w-96 sm:h-[500px] sm:rounded-xl bg-white sm:shadow-2xl sm:border sm:border-gray-100 flex flex-col overflow-hidden">
+        <div className="fixed bottom-20 right-3 left-3 sm:left-auto sm:right-5 sm:bottom-20 z-30 sm:w-96 h-[420px] sm:h-[500px] rounded-xl bg-white shadow-2xl border border-gray-100 flex flex-col overflow-hidden">
           {/* Header */}
-          <div className="bg-gold px-5 py-4 flex items-center justify-between shrink-0">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-                <Bot size={16} className="text-white" />
-              </div>
-              <div>
-                <h3 className="text-white text-sm font-body font-medium">Maeve Assistant</h3>
-                <p className="text-white/60 text-[10px] font-body font-light">
-                  {AI_CONFIG.enabled ? "AI Powered" : "Ask us anything"}
-                </p>
-              </div>
+          <div className="bg-gold px-5 py-3 flex items-center gap-3 shrink-0 rounded-t-xl">
+            <div className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center">
+              <Bot size={14} className="text-white" />
             </div>
-            <button onClick={() => setIsOpen(false)} className="sm:hidden w-8 h-8 rounded-full bg-white/20 flex items-center justify-center" aria-label="Close">
-              <X size={16} className="text-white" />
-            </button>
+            <div>
+              <h3 className="text-white text-sm font-body font-medium">Maeve Assistant</h3>
+              <p className="text-white/60 text-[10px] font-body font-light">
+                {AI_CONFIG.enabled ? "AI Powered" : "Ask us anything"}
+              </p>
+            </div>
           </div>
 
           {/* Messages */}
