@@ -22,29 +22,29 @@ const owners: TeamMember[] = [
   {
     name: "Tiffany Weaver",
     role: "Owner & Artistic Director",
-    image: "/images/team/tiffany.png",
+    image: "/tiffany.png",
   },
   {
     name: "Brie Whalen",
     role: "Managing Partner",
-    image: "/images/team/brie.png",
+    image: "/brie.png",
   },
 ];
 
 const stylists: TeamMember[] = [
-  { name: "Tristan", image: "/images/team/tristian.png" },
-  { name: "Brittany", image: "/images/team/brittany.png" },
-  { name: "Jo", image: "/images/team/jo.png" },
-  { name: "Meghan", image: "/images/team/meghan.png" },
-  { name: "Jess", image: "/images/team/jess.png" },
-  { name: "Britt", image: "/images/team/britt.png" },
-  { name: "Carson", image: "/images/team/carson.png" },
-  { name: "Hannah", image: "/images/team/hannah.png" },
-  { name: "Gracie", image: "/images/team/grace.png" },
-  { name: "Lindsey", image: "/images/team/lindsey.png" },
-  { name: "Sucel", image: "/images/team/sucel.png" },
-  { name: "Alexa", image: "/images/team/alexis.png" },
-  { name: "Anna", image: "/images/team/anna.png" },
+  { name: "Tristan", image: "/tristian.png" },
+  { name: "Brittany", image: "/brittany.png" },
+  { name: "Jo", image: "/jo.png" },
+  { name: "Meghan", image: "/meghan.png" },
+  { name: "Jess", image: "/jess.png" },
+  { name: "Britt", image: "/britt.png" },
+  { name: "Carson", image: "/carson.png" },
+  { name: "Hannah", image: "/hannah.png" },
+  { name: "Gracie", image: "/grace.png" },
+  { name: "Lindsey", image: "/lindsey.png" },
+  { name: "Sucel", image: "/sucel.png" },
+  { name: "Alexa", image: "/alexis.png" },
+  { name: "Anna", image: "/anna.png" },
 ];
 
 function useInView(threshold = 0.1) {
@@ -134,7 +134,7 @@ export default function MeetTheTeam() {
       <section className="relative h-[60vh] flex items-center justify-center bg-charcoal overflow-hidden">
         <div className="absolute inset-0 opacity-30">
           <Image
-            src="/images/hero.png"
+            src="/Maeve-Salon-03.png"
             alt="Maeve Salon"
             fill
             className="object-cover"

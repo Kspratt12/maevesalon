@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight, Clock, MapPin, Phone, Star, Sparkles } from "lucide-react";
+import { ArrowRight, Clock, MapPin, Phone, Sparkles, Palette, Scissors, Gem } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 function useInView(threshold = 0.1) {
@@ -186,18 +186,27 @@ function VideoCard({ src, stylist }: { src: string; stylist: string }) {
         muted
         playsInline
         preload="metadata"
+        controlsList="nodownload nofullscreen noremoteplayback"
+        disablePictureInPicture
       />
-      {/* Play button overlay */}
-      <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-100"} bg-black/20`}>
-        <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center group-hover:bg-white group-hover:scale-110 transition-all duration-300 shadow-lg">
-          <svg viewBox="0 0 24 24" width="20" height="20" fill="#2d2d2d" className="ml-1">
-            <path d="M8 5v14l11-7z" />
-          </svg>
+      {/* Play/Pause button overlay */}
+      <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"}`}>
+        <div className="w-16 h-16 rounded-full bg-gold/90 flex items-center justify-center group-hover:bg-gold group-hover:scale-110 transition-all duration-300 shadow-xl">
+          {isPlaying ? (
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="white">
+              <rect x="6" y="4" width="4" height="16" rx="1" />
+              <rect x="14" y="4" width="4" height="16" rx="1" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="white" className="ml-1">
+              <path d="M8 5v14l11-7z" />
+            </svg>
+          )}
         </div>
       </div>
       {/* Stylist tag */}
       <div className="absolute bottom-3 left-3 right-3">
-        <span className="text-[10px] font-body font-medium text-white bg-black/40 backdrop-blur-sm px-2 py-1 rounded-full">
+        <span className="text-[10px] font-body font-medium text-white bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full">
           {stylist}
         </span>
       </div>
@@ -495,16 +504,19 @@ export default function Home() {
                 title: "Hair Color",
                 desc: "From subtle highlights to bold transformations, our color specialists use Goldwell and Redken to create your perfect shade.",
                 href: "/hair-services",
+                icon: <Palette size={24} className="text-gold" />,
               },
               {
                 title: "Cuts & Styling",
                 desc: "Precision cuts and expert styling tailored to complement your unique features and lifestyle.",
                 href: "/hair-services",
+                icon: <Scissors size={24} className="text-gold" />,
               },
               {
                 title: "Nails by Tess",
                 desc: "Custom nail art and designs from classic manicures to bold, artistic creations at our nail space inside Maeve.",
                 href: "/nails-by-tess",
+                icon: <Gem size={24} className="text-gold" />,
               },
             ].map((service) => (
               <div
@@ -512,7 +524,7 @@ export default function Home() {
                 className="bg-cream p-10 text-center group hover:shadow-lg transition-all duration-500 border border-transparent hover:border-gold/20"
               >
                 <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-blush flex items-center justify-center group-hover:bg-gold/10 transition-colors">
-                  <Star size={24} className="text-gold" />
+                  {service.icon}
                 </div>
                 <h3 className="text-2xl font-heading font-medium text-charcoal mb-4">
                   {service.title}
@@ -654,7 +666,7 @@ export default function Home() {
             </p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-12 md:gap-16">
-            {["GOLDWELL", "KERASTASE", "ORIBE", "SHU UEMURA", "APEX CHAMBER"].map((brand) => (
+            {["GOLDWELL", "KERASTASE", "ORIBE", "SHU UEMURA", "REDKEN"].map((brand) => (
               <div
                 key={brand}
                 className="text-xl md:text-2xl font-heading font-light text-warm-gray/50 hover:text-charcoal transition-colors duration-300 cursor-default"
@@ -701,7 +713,7 @@ export default function Home() {
             </div>
           </div>
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.3!2d-78.8527!3d35.7327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89ac8f1b3e7e2b5d%3A0x5b2b2b2b2b2b2b2b!2s1121%20Apex%20Peakway%2C%20Apex%2C%20NC%2027502!5e0!3m2!1sen!2sus!4v1"
+            src="https://www.google.com/maps?q=1121+Apex+Peakway,+Apex,+NC+27502&output=embed"
             className="w-full h-72 md:h-96 border-0 grayscale hover:grayscale-0 transition-all duration-500"
             allowFullScreen
             loading="lazy"

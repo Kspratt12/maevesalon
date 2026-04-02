@@ -248,7 +248,7 @@ export default function ChatWidget() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`fixed bottom-6 right-6 z-30 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
-          isOpen ? "bg-charcoal rotate-0" : "bg-gold hover:bg-gold-dark hover:scale-110"
+          isOpen ? "bg-gold-dark rotate-0" : "bg-gold hover:bg-gold-dark hover:scale-110"
         }`}
         aria-label={isOpen ? "Close chat" : "Open chat"}
       >
@@ -266,8 +266,8 @@ export default function ChatWidget() {
         }`}
       >
         {/* Header */}
-        <div className="bg-charcoal px-5 py-4 flex items-center gap-3 shrink-0">
-          <div className="w-8 h-8 rounded-full bg-gold flex items-center justify-center">
+        <div className="bg-gold px-5 py-4 flex items-center gap-3 shrink-0">
+          <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
             <Bot size={16} className="text-white" />
           </div>
           <div>

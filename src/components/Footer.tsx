@@ -20,7 +20,7 @@ export default function Footer() {
               </h4>
               <p className="text-sm font-heading font-light text-charcoal/70 leading-relaxed">
                 1121 Apex Peakway<br />
-                Apex, North Carolina
+                Apex, North Carolina 27502
               </p>
             </div>
             <div>

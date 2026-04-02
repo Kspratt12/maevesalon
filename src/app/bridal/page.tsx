@@ -30,7 +30,7 @@ const steps = [
   {
     number: "01",
     title: "Initial Contact",
-    image: "/images/gallery/step1-bridal.png",
+    image: "/step1-bridal.png",
     content: (
       <>
         <p className="text-warm-gray text-sm font-body font-light leading-relaxed mb-4">
@@ -55,7 +55,7 @@ const steps = [
   {
     number: "02",
     title: "Review",
-    image: "/images/gallery/step2-bridal.png",
+    image: "/step2-bridal.png",
     content: (
       <p className="text-warm-gray text-sm font-body font-light leading-relaxed">
         Once our bridal coordinator reviews your details and confirms we have stylists
@@ -68,7 +68,7 @@ const steps = [
   {
     number: "03",
     title: "Trial",
-    image: "/images/gallery/step3-bridal.png",
+    image: "/step3-bridal.png",
     content: (
       <p className="text-warm-gray text-sm font-body font-light leading-relaxed">
         As the bride, we offer a trial for your hair and makeup needs. Fee applied. Our
@@ -83,7 +83,7 @@ const steps = [
   {
     number: "04",
     title: "Booking Requirements",
-    image: "/images/gallery/step4-bridal.png",
+    image: "/step4-bridal.png",
     content: (
       <p className="text-warm-gray text-sm font-body font-light leading-relaxed">
         Maeve Salon requires a signing of our contract and payment based on the total
@@ -94,7 +94,7 @@ const steps = [
   {
     number: "05",
     title: "Your Wedding is Booked!",
-    image: "/images/gallery/step5-bridal.png",
+    image: "/step5-bridal.png",
     content: (
       <p className="text-warm-gray text-sm font-body font-light leading-relaxed">
         Once we receive your contract/payment, either before or after your trial, your
@@ -158,7 +158,7 @@ export default function Bridal() {
       <section className="relative h-[70vh] flex items-center justify-center bg-charcoal overflow-hidden">
         <div className="absolute inset-0 opacity-30">
           <Image
-            src="/images/bridal.png"
+            src="/bridal.png"
             alt="Bridal Services at Maeve Salon"
             fill
             className="object-cover"

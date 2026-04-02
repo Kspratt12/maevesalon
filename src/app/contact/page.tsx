@@ -113,7 +113,7 @@ export default function Contact() {
           {/* Map */}
           <div className="mt-16">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.3!2d-78.8527!3d35.7327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89ac8f1b3e7e2b5d%3A0x5b2b2b2b2b2b2b2b!2s1121%20Apex%20Peakway%2C%20Apex%2C%20NC%2027502!5e0!3m2!1sen!2sus!4v1"
+              src="https://www.google.com/maps?q=1121+Apex+Peakway,+Apex,+NC+27502&output=embed"
               className="w-full h-80 md:h-96 border-0 grayscale hover:grayscale-0 transition-all duration-500"
               allowFullScreen
               loading="lazy"
