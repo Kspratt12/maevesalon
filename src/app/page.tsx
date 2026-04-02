@@ -302,6 +302,21 @@ function FAQSection() {
 function VideoCard({ src, stylist }: { src: string; stylist: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [hasPreview, setHasPreview] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    // Force load first frame on mobile
+    const handleLoaded = () => {
+      video.currentTime = 0.1;
+      setHasPreview(true);
+    };
+    video.addEventListener("loadeddata", handleLoaded);
+    // Fallback: try to load
+    video.load();
+    return () => video.removeEventListener("loadeddata", handleLoaded);
+  }, []);
 
   const togglePlay = () => {
     const video = videoRef.current;
@@ -322,17 +337,30 @@ function VideoCard({ src, stylist }: { src: string; stylist: string }) {
     >
       <video
         ref={videoRef}
-        src={src}
+        src={`${src}#t=0.1`}
         className="w-full h-full object-cover"
         loop
         muted
         playsInline
-        preload="metadata"
+        preload="auto"
         controlsList="nodownload nofullscreen noremoteplayback"
         disablePictureInPicture
       />
+      {/* Loading placeholder until video preview loads */}
+      {!hasPreview && !isPlaying && (
+        <div className="absolute inset-0 bg-gradient-to-br from-charcoal to-charcoal/80 flex items-center justify-center">
+          <div className="text-center">
+            <div className="w-16 h-16 rounded-full bg-gold/90 flex items-center justify-center mx-auto mb-3">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="white" className="ml-1">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+            <span className="text-[10px] font-body font-light text-white/60">{stylist}</span>
+          </div>
+        </div>
+      )}
       {/* Play/Pause button overlay */}
-      <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${isPlaying ? "opacity-0 hover:opacity-100" : "opacity-100"}`}>
+      <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${isPlaying ? "opacity-0 hover:opacity-100" : hasPreview ? "opacity-100" : "opacity-0"}`}>
         <div className="w-16 h-16 rounded-full bg-gold/90 flex items-center justify-center group-hover:bg-gold group-hover:scale-110 transition-all duration-300 shadow-xl">
           {isPlaying ? (
             <svg viewBox="0 0 24 24" width="22" height="22" fill="white">
