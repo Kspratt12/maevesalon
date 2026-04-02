@@ -416,6 +416,120 @@ function VideoCard({ src, stylist }: { src: string; stylist: string }) {
   );
 }
 
+const heroImages = ["/hero-main.png", "/hero-2.png", "/hero-3.png"];
+
+function HeroCarousel() {
+  const [currentHero, setCurrentHero] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHero((prev) => (prev + 1) % heroImages.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section className="relative h-screen flex items-center justify-center overflow-hidden">
+      {/* Rotating background images */}
+      {heroImages.map((img, i) => (
+        <div
+          key={img}
+          className={`absolute inset-0 transition-opacity duration-[2000ms] ${
+            i === currentHero ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <Image
+            src={img}
+            alt="Maeve Salon & Color Bar"
+            fill
+            className="object-cover"
+            priority={i === 0}
+            quality={100}
+            sizes="100vw"
+          />
+        </div>
+      ))}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
+
+      {/* Content */}
+      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+        <div className="animate-fade-in" style={{ animationDelay: "0.2s", opacity: 0 }}>
+          <p className="text-gold text-sm tracking-luxe uppercase font-body font-light mb-6" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>
+            Apex, North Carolina
+          </p>
+        </div>
+
+        <div className="animate-fade-in-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
+          <h1
+            className="text-6xl sm:text-8xl md:text-9xl font-light text-white mb-2"
+            style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontStyle: "italic", textShadow: "0 2px 20px rgba(0,0,0,0.4)" }}
+          >
+            Maeve
+          </h1>
+        </div>
+
+        <div className="animate-fade-in" style={{ animationDelay: "0.6s", opacity: 0 }}>
+          <p className="text-white/90 text-sm md:text-base tracking-luxe uppercase font-body font-light mb-8" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>
+            Salon & Color Bar
+          </p>
+        </div>
+
+        <div className="animate-fade-in" style={{ animationDelay: "0.8s", opacity: 0 }}>
+          <div className="w-16 h-px bg-gold mx-auto mb-8" />
+          <p className="text-white/90 text-sm md:text-lg font-body font-light max-w-xl mx-auto leading-relaxed mb-10" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}>
+            A luxury hair salon experience above and beyond the rest.
+            Featuring Goldwell and Redken color, along with Oribe and
+            Kerastase products.
+          </p>
+        </div>
+
+        <div
+          className="animate-fade-in-up flex flex-col sm:flex-row items-center justify-center gap-4"
+          style={{ animationDelay: "1s", opacity: 0 }}
+        >
+          <Link
+            href="/book-appointment"
+            className="group px-8 py-3.5 bg-gold text-white text-xs tracking-elegant uppercase font-body font-medium hover:bg-gold-dark transition-all duration-300 flex items-center gap-2"
+          >
+            Book Appointment
+            <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+          </Link>
+          <Link
+            href="/hair-services"
+            className="px-8 py-3.5 border border-white/30 text-white text-xs tracking-elegant uppercase font-body font-light hover:border-gold hover:text-gold transition-all duration-300"
+          >
+            Our Services
+          </Link>
+        </div>
+
+        <div
+          className="animate-fade-in mt-12 flex items-center justify-center gap-2 text-white/70"
+          style={{ animationDelay: "1.2s", opacity: 0 }}
+        >
+          <Phone size={14} />
+          <a href="tel:919-951-7866" className="text-sm font-body font-light hover:text-gold transition-colors">
+            919.951.7866
+          </a>
+        </div>
+      </div>
+
+      {/* Slide indicators */}
+      <div className="absolute bottom-24 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10">
+        {heroImages.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentHero(i)}
+            className={`w-2 h-2 rounded-full transition-all duration-500 ${
+              i === currentHero ? "bg-gold w-6" : "bg-white/40 hover:bg-white/60"
+            }`}
+            aria-label={`Slide ${i + 1}`}
+          />
+        ))}
+      </div>
+    </section>
+  );
+}
+
 const allHairPics = Array.from({ length: 29 }, (_, i) => `/hair-pic${i + 1}.png`);
 
 function SeeOurWorkSection() {
@@ -615,88 +729,8 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section */}
-      <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src="/hero-main.png"
-            alt="Maeve Salon & Color Bar"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <div className="animate-fade-in" style={{ animationDelay: "0.2s", opacity: 0 }}>
-            <p className="text-gold text-sm tracking-luxe uppercase font-body font-light mb-6" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>
-              Apex, North Carolina
-            </p>
-          </div>
-
-          <div className="animate-fade-in-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
-            <h1
-              className="text-6xl sm:text-8xl md:text-9xl font-light text-white mb-2"
-              style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontStyle: "italic", textShadow: "0 2px 20px rgba(0,0,0,0.4)" }}
-            >
-              Maeve
-            </h1>
-          </div>
-
-          <div className="animate-fade-in" style={{ animationDelay: "0.6s", opacity: 0 }}>
-            <p className="text-white/90 text-sm md:text-base tracking-luxe uppercase font-body font-light mb-8" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>
-              Salon & Color Bar
-            </p>
-          </div>
-
-          <div className="animate-fade-in" style={{ animationDelay: "0.8s", opacity: 0 }}>
-            <div className="w-16 h-px bg-gold mx-auto mb-8" />
-            <p className="text-white/90 text-sm md:text-lg font-body font-light max-w-xl mx-auto leading-relaxed mb-10" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}>
-              A luxury hair salon experience above and beyond the rest.
-              Featuring Goldwell and Redken color, along with Oribe and
-              Kerastase products.
-            </p>
-          </div>
-
-          <div
-            className="animate-fade-in-up flex flex-col sm:flex-row items-center justify-center gap-4"
-            style={{ animationDelay: "1s", opacity: 0 }}
-          >
-            <Link
-              href="/book-appointment"
-              className="group px-8 py-3.5 bg-gold text-white text-xs tracking-elegant uppercase font-body font-medium hover:bg-gold-dark transition-all duration-300 flex items-center gap-2"
-            >
-              Book Appointment
-              <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
-            </Link>
-            <Link
-              href="/hair-services"
-              className="px-8 py-3.5 border border-white/30 text-white text-xs tracking-elegant uppercase font-body font-light hover:border-gold hover:text-gold transition-all duration-300"
-            >
-              Our Services
-            </Link>
-          </div>
-
-          <div
-            className="animate-fade-in mt-12 flex items-center justify-center gap-2 text-white/70"
-            style={{ animationDelay: "1.2s", opacity: 0 }}
-          >
-            <Phone size={14} />
-            <a href="tel:919-951-7866" className="text-sm font-body font-light hover:text-gold transition-colors">
-              919.951.7866
-            </a>
-          </div>
-        </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-5 h-8 rounded-full border border-white/30 flex items-start justify-center pt-1.5">
-            <div className="w-1 h-2 rounded-full bg-gold" />
-          </div>
-        </div>
-      </section>
+      {/* Hero Section with rotating images */}
+      <HeroCarousel />
 
       {/* Book Your Service - Sleek Modern Widget */}
       <BookingWidget />
