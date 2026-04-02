@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Calendar, Phone, MapPin, Clock } from "lucide-react";
 
 export default function BookAppointment() {
@@ -7,15 +8,15 @@ export default function BookAppointment() {
     <>
       {/* Hero */}
       <section className="relative h-[50vh] flex items-center justify-center bg-charcoal overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-20"
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&q=80')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
+        <div className="absolute inset-0 opacity-30">
+          <Image
+            src="/Maeve-Salon-05.png"
+            alt="Maeve Salon"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-charcoal/90" />
         <div className="relative z-10 text-center">
           <Calendar className="mx-auto text-gold mb-6 animate-fade-in" size={28} />
@@ -40,18 +41,19 @@ export default function BookAppointment() {
           </div>
 
           {/* Phorest Booking Embed */}
-          <div className="bg-cream p-4 md:p-8 mb-16">
+          <div className="bg-cream p-2 sm:p-4 md:p-8 mb-16">
             <iframe
               src="https://www.phorest.com/salon/maevesalonandcolorbar/book/service-selection?showSpecialOffers=false"
-              className="w-full border-0"
+              className="w-full border-0 rounded"
               style={{ height: "700px" }}
               title="Book an appointment at Maeve Salon & Color Bar"
               allow="payment"
+              loading="lazy"
             />
           </div>
 
           {/* Contact Info */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-3xl mx-auto">
             <div className="text-center">
               <Phone className="mx-auto text-gold mb-3" size={20} />
               <h4 className="text-xs tracking-elegant uppercase font-body font-medium text-charcoal mb-2">
@@ -61,7 +63,7 @@ export default function BookAppointment() {
                 href="tel:919-951-7866"
                 className="text-sm font-body font-light text-warm-gray hover:text-gold transition-colors"
               >
-                919-951-7866
+                (919) 951-7866
               </a>
             </div>
             <div className="text-center">
@@ -72,7 +74,7 @@ export default function BookAppointment() {
               <p className="text-sm font-body font-light text-warm-gray">
                 1121 Apex Peakway
                 <br />
-                Apex, NC
+                Apex, NC 27502
               </p>
             </div>
             <div className="text-center">

@@ -3,6 +3,7 @@ import { Cormorant_Garamond, Montserrat, Playfair_Display } from "next/font/goog
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ChatWidget from "@/components/ChatWidget";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -52,6 +53,7 @@ export default function RootLayout({
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
+        <ChatWidget />
       </body>
     </html>
   );

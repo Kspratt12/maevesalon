@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { MapPin, Phone, Mail, Clock, ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -8,6 +9,15 @@ export default function Contact() {
     <>
       {/* Hero */}
       <section className="relative h-[50vh] flex items-center justify-center bg-charcoal overflow-hidden">
+        <div className="absolute inset-0 opacity-30">
+          <Image
+            src="/Maeve-Salon-01.png"
+            alt="Maeve Salon"
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-charcoal/90" />
         <div className="relative z-10 text-center">
           <h1 className="text-5xl md:text-7xl font-heading font-light text-white animate-fade-in-up">
@@ -34,7 +44,7 @@ export default function Contact() {
                     <MapPin size={18} className="text-gold mt-0.5 shrink-0" />
                     <div className="text-sm font-body font-light text-warm-gray">
                       <p>1121 Apex Peakway</p>
-                      <p>Apex, North Carolina</p>
+                      <p>Apex, North Carolina 27502</p>
                     </div>
                   </div>
                 </div>
@@ -48,7 +58,7 @@ export default function Contact() {
                       className="flex items-center gap-3 text-sm font-body font-light text-warm-gray hover:text-gold transition-colors"
                     >
                       <Phone size={18} className="text-gold shrink-0" />
-                      919-951-7866
+                      (919) 951-7866
                     </a>
                     <a
                       href="mailto:info@maevesalon.com"
@@ -103,10 +113,11 @@ export default function Contact() {
           {/* Map */}
           <div className="mt-16">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.3!2d-78.855!3d35.732!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89acf3a0d0c0d0d1%3A0x0!2s1121+Apex+Peakway+Apex+NC!5e0!3m2!1sen!2sus!4v1"
-              className="w-full h-96 border-0 grayscale hover:grayscale-0 transition-all duration-500"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.3!2d-78.8527!3d35.7327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89ac8f1b3e7e2b5d%3A0x5b2b2b2b2b2b2b2b!2s1121%20Apex%20Peakway%2C%20Apex%2C%20NC%2027502!5e0!3m2!1sen!2sus!4v1"
+              className="w-full h-80 md:h-96 border-0 grayscale hover:grayscale-0 transition-all duration-500"
               allowFullScreen
               loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
               title="Maeve Salon Location"
             />
           </div>

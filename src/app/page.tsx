@@ -78,6 +78,133 @@ const serviceCategories: Record<string, { name: string; price: string }[]> = {
   ],
 };
 
+const faqs = [
+  {
+    q: "Do I need a consultation before my first visit?",
+    a: "We recommend a consultation for color corrections, extensions, and transformative services. For standard cuts and color, you can book directly. New clients get a complimentary consultation built into their first appointment.",
+  },
+  {
+    q: "What is your cancellation policy?",
+    a: "We ask for at least 24 hours notice for cancellations or rescheduling. Cancellations with less than 24 hours notice may result in a 50% charge of the scheduled service. No shows are charged 50% of the service.",
+  },
+  {
+    q: "How do I know which stylist to book with?",
+    a: "Each of our 18 stylists brings unique strengths. If you're unsure, book a consultation and we'll match you with the perfect stylist based on your hair goals. You can also check our Meet the Team page to learn more about each stylist.",
+  },
+  {
+    q: "What products do you use?",
+    a: "We use premium brands including Goldwell and Redken for color, and Oribe, Kerastase, and Shu Uemura for styling and treatments. All products are available for retail purchase at the salon.",
+  },
+  {
+    q: "Do you offer bridal services on location?",
+    a: "Yes! We offer both in-salon and on-location bridal services. Contact us with your wedding date, ceremony time, location, and party size and our bridal coordinator will provide a custom quote.",
+  },
+  {
+    q: "Do gift certificates expire?",
+    a: "Gift certificates are valid for up to one year from the date of purchase. They can be used for any service or product at Maeve Salon & Color Bar.",
+  },
+  {
+    q: "What if I'm not happy with my service?",
+    a: "Your satisfaction is our priority. Please let us know at the time of service or within 48 hours. We offer complimentary corrective services within 2 weeks of your original appointment.",
+  },
+];
+
+function FAQSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  return (
+    <section className="py-24 bg-white">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-14">
+          <p className="text-gold text-xs tracking-luxe uppercase font-body font-light mb-4">
+            Common Questions
+          </p>
+          <h2 className="text-4xl md:text-5xl font-heading font-light text-charcoal">
+            Frequently{" "}
+            <span style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontStyle: "italic" }} className="text-gold">
+              Asked
+            </span>
+          </h2>
+        </div>
+        <div className="space-y-3">
+          {faqs.map((faq, i) => (
+            <div key={i} className="border border-gray-100 rounded-lg overflow-hidden">
+              <button
+                onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                className="w-full flex items-center justify-between px-6 py-5 text-left group hover:bg-gray-50/50 transition-colors"
+              >
+                <span className="text-sm font-body font-medium text-charcoal pr-4">
+                  {faq.q}
+                </span>
+                <span className={`text-gold text-xl font-light shrink-0 transition-transform duration-300 ${openIndex === i ? "rotate-45" : ""}`}>
+                  +
+                </span>
+              </button>
+              <div
+                className={`overflow-hidden transition-all duration-300 ${
+                  openIndex === i ? "max-h-60 opacity-100" : "max-h-0 opacity-0"
+                }`}
+              >
+                <p className="px-6 pb-5 text-sm font-body font-light text-warm-gray leading-relaxed">
+                  {faq.a}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function VideoCard({ src, stylist }: { src: string; stylist: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const togglePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play();
+      setIsPlaying(true);
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  return (
+    <div
+      className="relative aspect-[9/16] sm:aspect-[3/4] overflow-hidden bg-charcoal cursor-pointer group rounded-sm"
+      onClick={togglePlay}
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        className="w-full h-full object-cover"
+        loop
+        muted
+        playsInline
+        preload="metadata"
+      />
+      {/* Play button overlay */}
+      <div className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 ${isPlaying ? "opacity-0" : "opacity-100"} bg-black/20`}>
+        <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center group-hover:bg-white group-hover:scale-110 transition-all duration-300 shadow-lg">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="#2d2d2d" className="ml-1">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        </div>
+      </div>
+      {/* Stylist tag */}
+      <div className="absolute bottom-3 left-3 right-3">
+        <span className="text-[10px] font-body font-medium text-white bg-black/40 backdrop-blur-sm px-2 py-1 rounded-full">
+          {stylist}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 function BookingWidget() {
   const [activeTab, setActiveTab] = useState("Cut & Style");
   const [selectedService, setSelectedService] = useState("");
@@ -343,15 +470,12 @@ export default function Home() {
             Welcome to Maeve
           </h2>
           <div className="w-12 h-px bg-gold mx-auto mb-8" />
-          <p className="text-warm-gray text-base md:text-lg font-body font-light leading-relaxed max-w-3xl mx-auto mb-6">
+          <p className="text-warm-gray text-lg md:text-2xl font-heading font-light leading-relaxed max-w-3xl mx-auto">
             Maeve Salon and Color Bar is a luxury hair salon located in Apex,
             North Carolina. At Maeve, we are all about providing a safe,
             high-quality salon experience above and beyond the rest.
-          </p>
-          <p className="text-warm-gray text-base md:text-lg font-body font-light leading-relaxed max-w-3xl mx-auto">
             Featuring Goldwell and Redken color, along with Oribe and Kerastase
-            products, our talented team of stylists is dedicated to helping you
-            look and feel your absolute best.
+            products.
           </p>
         </div>
       </section>
@@ -527,36 +651,35 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Instagram / Follow Us */}
+      {/* Instagram Videos / Follow Us */}
       <section className="py-24 bg-cream">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl tracking-elegant uppercase font-body font-extralight text-charcoal mb-4">
-            Follow Us
-          </h2>
-          <a
-            href="https://www.instagram.com/maeve.salon/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold text-sm font-body font-light hover:text-gold-dark transition-colors"
-          >
-            @maeve.salon
-          </a>
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-3">
-            {["/nail3.png", "/nail5.png", "/hair-pic4.png", "/hair-pic8.png"].map((img, i) => (
-              <div key={i} className="aspect-square relative overflow-hidden cursor-pointer group">
-                <Image
-                  src={img}
-                  alt={`Maeve Salon work ${i + 1}`}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/30">
-                  <svg viewBox="0 0 24 24" width="24" height="24" fill="white">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                  </svg>
-                </div>
-              </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-gold text-xs tracking-luxe uppercase font-body font-light mb-4">
+              Follow Us
+            </p>
+            <h2 className="text-3xl md:text-4xl font-heading font-light text-charcoal mb-3">
+              @maeve.salon
+            </h2>
+            <a
+              href="https://www.instagram.com/maeve.salon/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gold text-sm font-body font-light hover:text-gold-dark transition-colors inline-flex items-center gap-2"
+            >
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+              Follow us on Instagram
+            </a>
+          </div>
+
+          {/* Video Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-4">
+            {[
+              { src: "/videos/video2.mp4", stylist: "@lindseywidg__beauty" },
+              { src: "/videos/video3.mp4", stylist: "@annadblondin" },
+              { src: "/videos/video6.mp4", stylist: "@gorgjesshair_" },
+            ].map((video, i) => (
+              <VideoCard key={i} src={video.src} stylist={video.stylist} />
             ))}
           </div>
         </div>
@@ -585,6 +708,51 @@ export default function Home() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <FAQSection />
+
+      {/* Find Us - Map */}
+      <section className="py-24 bg-cream">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <p className="text-gold text-xs tracking-luxe uppercase font-body font-light mb-4">
+              Visit Us
+            </p>
+            <h2 className="text-4xl md:text-5xl font-heading font-light text-charcoal">
+              Find Us
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-10">
+            <div className="text-center">
+              <MapPin className="mx-auto text-gold mb-3" size={20} />
+              <p className="text-sm font-body font-light text-warm-gray">
+                1121 Apex Peakway<br />Apex, NC 27502
+              </p>
+            </div>
+            <div className="text-center">
+              <Phone className="mx-auto text-gold mb-3" size={20} />
+              <a href="tel:919-951-7866" className="text-sm font-body font-light text-warm-gray hover:text-gold transition-colors">
+                (919) 951-7866
+              </a>
+            </div>
+            <div className="text-center">
+              <Clock className="mx-auto text-gold mb-3" size={20} />
+              <p className="text-sm font-body font-light text-warm-gray">
+                Mon-Thu: 9am-8pm<br />Fri: 9am-6pm | Sat: 9am-3pm
+              </p>
+            </div>
+          </div>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3239.3!2d-78.8527!3d35.7327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89ac8f1b3e7e2b5d%3A0x5b2b2b2b2b2b2b2b!2s1121%20Apex%20Peakway%2C%20Apex%2C%20NC%2027502!5e0!3m2!1sen!2sus!4v1"
+            className="w-full h-72 md:h-96 border-0 grayscale hover:grayscale-0 transition-all duration-500"
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Maeve Salon Location"
+          />
         </div>
       </section>
 

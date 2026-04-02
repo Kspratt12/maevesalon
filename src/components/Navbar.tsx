@@ -129,14 +129,17 @@ export default function Navbar() {
               <X size={24} />
             </button>
           </div>
-          <div className="flex-1 flex flex-col justify-center px-8">
+          <div className="flex-1 flex flex-col justify-center px-6 gap-2 overflow-y-auto py-4">
             {navLinks.map((link, i) => (
               <Link
                 key={link.name}
                 href={link.href}
                 onClick={() => setIsOpen(false)}
-                className="py-3 text-sm tracking-elegant uppercase font-body font-light text-charcoal hover:text-gold transition-colors border-b border-gray-50"
-                style={{ animationDelay: `${i * 0.05}s` }}
+                className={`py-3 text-center text-sm tracking-elegant uppercase font-body font-light border transition-all duration-200 ${
+                  i === 0
+                    ? "bg-charcoal/80 text-white border-charcoal/80"
+                    : "text-charcoal border-gray-300 hover:bg-charcoal/5 hover:border-charcoal"
+                }`}
               >
                 {link.name}
               </Link>
