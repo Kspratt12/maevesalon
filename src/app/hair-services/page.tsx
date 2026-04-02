@@ -127,24 +127,32 @@ function ServiceSection({ category, index }: { category: ServiceCategory; index:
       </div>
       <div className="space-y-0">
         {category.services.map((service) => (
-          <div
+          <a
             key={service.name}
-            className="flex items-center justify-between py-4 border-b border-gray-100 group hover:border-gold/30 transition-colors"
+            href="https://www.phorest.com/salon/maevesalonandcolorbar/book/service-selection?showSpecialOffers=false"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-between py-4 border-b border-gray-100 group hover:border-gold/30 transition-colors cursor-pointer"
           >
-            <div>
+            <div className="flex items-center gap-3">
               <span className="text-sm font-body font-light text-charcoal group-hover:text-gold transition-colors">
                 {service.name}
               </span>
               {service.note && (
-                <span className="text-xs text-warm-gray ml-2">
+                <span className="text-xs text-warm-gray">
                   ({service.note})
                 </span>
               )}
             </div>
-            <span className="text-sm font-body font-light text-gold">
-              {service.price}
-            </span>
-          </div>
+            <div className="flex items-center gap-3">
+              <span className="text-sm font-body font-light text-gold">
+                {service.price}
+              </span>
+              <span className="text-[10px] font-body font-medium text-gold opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-wide">
+                Book
+              </span>
+            </div>
+          </a>
         ))}
       </div>
     </div>

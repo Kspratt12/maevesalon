@@ -122,6 +122,14 @@ function TeamCard({
         >
           {member.name}
         </h3>
+        <a
+          href="https://www.phorest.com/salon/maevesalonandcolorbar/book/service-selection?showSpecialOffers=false"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block mt-3 px-5 py-2 border border-gold text-[10px] tracking-elegant uppercase font-body font-medium text-gold hover:bg-gold hover:text-white transition-all duration-300"
+        >
+          Book with {member.name.split(" ")[0]}
+        </a>
       </div>
     </div>
   );

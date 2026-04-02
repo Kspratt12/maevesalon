@@ -73,7 +73,7 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 href={link.href}
-                className={`px-3 py-2 text-[11px] tracking-elegant uppercase font-body font-light transition-all duration-300 hover:text-gold elegant-underline ${
+                className={`px-3 py-2 text-xs tracking-wide uppercase font-body font-light transition-all duration-300 hover:text-gold elegant-underline ${
                   scrolled ? "text-charcoal" : "text-white"
                 }`}
               >

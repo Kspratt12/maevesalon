@@ -298,9 +298,12 @@ export default function NailsByTess() {
                 <div className="w-8 h-px bg-gold mb-6" />
                 <div className="space-y-0">
                   {category.services.map((service) => (
-                    <div
+                    <a
                       key={service.name}
-                      className="py-5 border-b border-gray-100 group hover:border-gold/30 transition-colors"
+                      href="https://www.phorest.com/salon/maevesalonandcolorbar/book/service-selection?showSpecialOffers=false"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block py-5 border-b border-gray-100 group hover:border-gold/30 transition-colors cursor-pointer"
                     >
                       <div className="flex items-start justify-between gap-4">
                         <div className="flex-1">
@@ -318,11 +321,16 @@ export default function NailsByTess() {
                             </p>
                           )}
                         </div>
-                        <span className="text-sm font-body font-medium text-gold shrink-0">
-                          {service.price}
-                        </span>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-sm font-body font-medium text-gold">
+                            {service.price}
+                          </span>
+                          <span className="text-[10px] font-body font-medium text-gold opacity-0 group-hover:opacity-100 transition-opacity uppercase tracking-wide">
+                            Book
+                          </span>
+                        </div>
                       </div>
-                    </div>
+                    </a>
                   ))}
                 </div>
               </div>

@@ -238,6 +238,42 @@ export default function OnlineConsultation() {
                   />
                 </div>
 
+                {/* Photo Upload */}
+                <div>
+                  <label className="block text-xs tracking-elegant uppercase font-body font-medium text-charcoal mb-2">
+                    Inspiration Photos
+                  </label>
+                  <div className="border-2 border-dashed border-gray-200 rounded-lg p-6 text-center hover:border-gold/50 transition-colors">
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      className="hidden"
+                      id="photo-upload"
+                      onChange={(e) => {
+                        const files = e.target.files;
+                        if (files && files.length > 0) {
+                          const names = Array.from(files).map(f => f.name).join(", ");
+                          alert(`${files.length} photo(s) selected: ${names}\n\nNote: Photos will be attached when you send the consultation email.`);
+                        }
+                      }}
+                    />
+                    <label htmlFor="photo-upload" className="cursor-pointer">
+                      <svg className="mx-auto mb-3 text-gold" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                      </svg>
+                      <p className="text-sm font-body font-light text-charcoal mb-1">
+                        Click to upload inspiration photos
+                      </p>
+                      <p className="text-xs font-body font-light text-warm-gray">
+                        Upload multiple photos of your desired look, current hair, or inspiration
+                      </p>
+                    </label>
+                  </div>
+                </div>
+
                 <div>
                   <label className="block text-xs tracking-elegant uppercase font-body font-medium text-charcoal mb-2">
                     Color History

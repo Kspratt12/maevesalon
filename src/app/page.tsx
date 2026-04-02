@@ -367,18 +367,15 @@ function SeeOurWorkSection() {
   };
 
   return (
-    <section className="py-24 bg-cream overflow-hidden">
+    <section className="py-14 bg-cream overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <p className="text-gold text-xs tracking-luxe uppercase font-body font-light mb-4">
+        <div className="text-center mb-8">
+          <p className="text-gold text-xs tracking-luxe uppercase font-body font-light mb-3">
             Our Work
           </p>
           <h2 className="text-4xl md:text-5xl font-heading font-light text-charcoal">
             See Our Work
           </h2>
-          <p className="text-warm-gray text-sm font-body font-light mt-4">
-            Scroll to explore our latest styles and transformations
-          </p>
         </div>
       </div>
       <div className="relative">
@@ -402,13 +399,13 @@ function SeeOurWorkSection() {
 
         <div
           ref={scrollRef}
-          className="flex gap-3 overflow-x-auto pb-6 px-12 sm:px-16 snap-x snap-mandatory scrollbar-hide"
+          className="flex gap-2 overflow-x-auto pb-4 px-12 sm:px-16 snap-x snap-mandatory scrollbar-hide"
           style={{ scrollbarWidth: "none" }}
         >
           {Array.from({ length: 25 }, (_, i) => (
             <div
               key={i}
-              className="relative shrink-0 w-56 md:w-64 aspect-[3/4] overflow-hidden snap-center group rounded-sm"
+              className="relative shrink-0 w-48 sm:w-56 md:w-64 aspect-[3/4] overflow-hidden snap-center group"
             >
               <Image
                 src={`/hair-pic${i + 1}.png`}
@@ -423,8 +420,8 @@ function SeeOurWorkSection() {
         </div>
 
         {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-6 w-12 bg-gradient-to-r from-cream to-transparent pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-6 w-12 bg-gradient-to-l from-cream to-transparent pointer-events-none" />
+        <div className="absolute left-0 top-0 bottom-4 w-12 bg-gradient-to-r from-cream to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-cream to-transparent pointer-events-none" />
       </div>
     </section>
   );
@@ -443,19 +440,8 @@ function BookingWidget() {
   };
 
   return (
-    <section className="relative overflow-hidden">
-      {/* Background image with overlay */}
-      <div className="absolute inset-0">
-        <Image
-          src="/Maeve-Salon-02.png"
-          alt="Maeve Salon"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
-
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+    <section className="relative overflow-hidden -mt-20 z-20">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-16">
         <div className="bg-white/95 backdrop-blur-sm shadow-2xl">
           {/* Header with tabs */}
           <div className="p-6 md:p-8 pb-0">
@@ -507,22 +493,31 @@ function BookingWidget() {
             </div>
           </div>
 
-          {/* CTA row */}
+          {/* CTA row with stylist selector */}
           <div className="p-6 md:p-8 pt-5 border-t border-gray-100">
             <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex flex-wrap items-center gap-4 text-xs text-warm-gray font-body font-light">
-                <span className="flex items-center gap-1.5">
-                  <Clock size={12} className="text-gold" /> Mon-Thu: 9AM-8PM
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock size={12} className="text-gold" /> Fri: 9AM-6PM
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock size={12} className="text-gold" /> Sat: 9AM-3PM
-                </span>
-                <a href="tel:919-951-7866" className="flex items-center gap-1.5 hover:text-gold transition-colors">
-                  <Phone size={12} className="text-gold" /> (919) 951-7866
-                </a>
+              <div className="flex flex-wrap items-center gap-4">
+                <div>
+                  <label className="block text-[10px] tracking-luxe uppercase font-body font-medium text-charcoal mb-1.5">
+                    Select Stylist
+                  </label>
+                  <select className="px-4 py-2.5 border border-gray-300 text-sm font-body font-light text-charcoal bg-white focus:border-gold focus:outline-none transition-colors min-w-[180px]">
+                    {stylists.map((s) => (
+                      <option key={s} value={s}>{s === "Any Stylist" ? "Any stylist" : s}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="flex flex-wrap items-center gap-3 text-xs text-warm-gray font-body font-light">
+                  <span className="flex items-center gap-1.5">
+                    <Clock size={12} className="text-gold" /> Mon-Thu: 9AM-8PM
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock size={12} className="text-gold" /> Fri: 9AM-6PM
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <Clock size={12} className="text-gold" /> Sat: 9AM-3PM
+                  </span>
+                </div>
               </div>
               <button
                 onClick={handleBookNow}
@@ -627,7 +622,7 @@ export default function Home() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="absolute bottom-24 left-1/2 -translate-x-1/2 animate-bounce">
           <div className="w-5 h-8 rounded-full border border-white/30 flex items-start justify-center pt-1.5">
             <div className="w-1 h-2 rounded-full bg-gold" />
           </div>
@@ -909,7 +904,7 @@ export default function Home() {
       {/* CTA Section */}
       <section className="relative py-32 bg-charcoal overflow-hidden">
         <div className="absolute inset-0 opacity-10">
-          <Image src="/hero-main.png" alt="" fill className="object-cover" />
+          <Image src="/Maeve-Salon-02.png" alt="" fill className="object-cover" />
         </div>
         <div
           ref={cta.ref}
