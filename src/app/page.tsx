@@ -580,39 +580,35 @@ export default function Home() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80" />
         </div>
-
-        {/* Decorative elements */}
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full border border-gold/10 animate-pulse" />
-        <div className="absolute bottom-1/3 right-1/4 w-48 h-48 rounded-full border border-gold/5" />
 
         {/* Content */}
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           <div className="animate-fade-in" style={{ animationDelay: "0.2s", opacity: 0 }}>
-            <p className="text-gold text-xs tracking-luxe uppercase font-body font-light mb-6">
+            <p className="text-gold text-sm tracking-luxe uppercase font-body font-light mb-6" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>
               Apex, North Carolina
             </p>
           </div>
 
           <div className="animate-fade-in-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
             <h1
-              className="text-5xl sm:text-7xl md:text-8xl font-light text-white mb-2"
-              style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontStyle: "italic" }}
+              className="text-6xl sm:text-8xl md:text-9xl font-light text-white mb-2"
+              style={{ fontFamily: "var(--font-playfair), 'Playfair Display', serif", fontStyle: "italic", textShadow: "0 2px 20px rgba(0,0,0,0.4)" }}
             >
               Maeve
             </h1>
           </div>
 
           <div className="animate-fade-in" style={{ animationDelay: "0.6s", opacity: 0 }}>
-            <p className="text-white/70 text-sm md:text-base tracking-luxe uppercase font-body font-extralight mb-8">
+            <p className="text-white/90 text-sm md:text-base tracking-luxe uppercase font-body font-light mb-8" style={{ textShadow: "0 1px 8px rgba(0,0,0,0.5)" }}>
               Salon & Color Bar
             </p>
           </div>
 
           <div className="animate-fade-in" style={{ animationDelay: "0.8s", opacity: 0 }}>
             <div className="w-16 h-px bg-gold mx-auto mb-8" />
-            <p className="text-white/60 text-sm md:text-base font-body font-light max-w-xl mx-auto leading-relaxed mb-10">
+            <p className="text-white/90 text-sm md:text-lg font-body font-light max-w-xl mx-auto leading-relaxed mb-10" style={{ textShadow: "0 1px 6px rgba(0,0,0,0.4)" }}>
               A luxury hair salon experience above and beyond the rest.
               Featuring Goldwell and Redken color, along with Oribe and
               Kerastase products.
@@ -639,7 +635,7 @@ export default function Home() {
           </div>
 
           <div
-            className="animate-fade-in mt-12 flex items-center justify-center gap-2 text-white/40"
+            className="animate-fade-in mt-12 flex items-center justify-center gap-2 text-white/70"
             style={{ animationDelay: "1.2s", opacity: 0 }}
           >
             <Phone size={14} />
