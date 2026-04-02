@@ -121,6 +121,14 @@ const testimonials = [
     stylist: "Gracie",
     service: "Color & Cut",
   },
+  {
+    name: "Meredith Bailey",
+    stars: 5,
+    text: "Brittany M has helped transform my once box-colored hair to the perfect shade of blonde. Not only is Brittany a talented stylist, she is also an amazing person. I also got 25 inch extensions from Tristan Moorer and she has made all of my hair dreams come true. I cannot recommend Maeve Salon enough!",
+    image: "/Meredith-Bailey.png",
+    stylist: "Brittany M. & Tristan",
+    service: "Color, Extensions & Cut",
+  },
 ];
 
 function TestimonialsSection() {
