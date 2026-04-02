@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Shield } from "lucide-react";
 
 function useInView(threshold = 0.1) {
@@ -125,6 +126,9 @@ export default function SalonPolicy() {
     <>
       {/* Hero */}
       <section className="relative h-[50vh] flex items-center justify-center bg-charcoal overflow-hidden">
+        <div className="absolute inset-0 opacity-30">
+          <Image src="/Maeve-Salon-06.png" alt="Maeve Salon" fill className="object-cover" priority />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-charcoal/90" />
         <div className="relative z-10 text-center">
           <Shield className="mx-auto text-gold mb-6 animate-fade-in" size={28} />

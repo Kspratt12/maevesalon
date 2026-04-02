@@ -71,10 +71,10 @@ const serviceCategories: Record<string, { name: string; price: string }[]> = {
     { name: "Bridal Trial", price: "Free Consult" },
   ],
   "Nails": [
-    { name: "Short and Sweet Mani", price: "from $20" },
-    { name: "Builder Gel Full Set", price: "from $65" },
-    { name: "Gel-X Full Set", price: "from $70" },
-    { name: "Acrylic Full Set", price: "from $65" },
+    { name: "Short and Sweet Mani", price: "from $15" },
+    { name: "Builder Gel Mani", price: "from $55" },
+    { name: "Gel-X Full Set", price: "from $60" },
+    { name: "Acrylic Full Set", price: "from $55" },
   ],
 };
 
@@ -231,7 +231,7 @@ function BookingWidget() {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div className="bg-white/97 backdrop-blur-sm shadow-2xl">
+        <div className="bg-white/95 backdrop-blur-sm shadow-2xl">
           {/* Header with tabs */}
           <div className="p-6 md:p-8 pb-0">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
@@ -282,71 +282,26 @@ function BookingWidget() {
             </div>
           </div>
 
-          {/* Booking form row */}
-          <div className="p-6 md:p-8 pt-5">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 items-end">
-              <div>
-                <label className="block text-[10px] tracking-luxe uppercase font-body font-medium text-charcoal mb-2">
-                  Stylist
-                </label>
-                <select className="w-full px-3 py-2.5 border border-gray-300 text-sm font-body font-light text-charcoal bg-white focus:border-gold focus:outline-none transition-colors appearance-none cursor-pointer">
-                  {stylists.map((s) => (
-                    <option key={s} value={s}>{s === "Any Stylist" ? "Any stylist" : s}</option>
-                  ))}
-                </select>
-              </div>
-              <div>
-                <label className="block text-[10px] tracking-luxe uppercase font-body font-medium text-charcoal mb-2">
-                  Date
-                </label>
-                <input
-                  type="date"
-                  className="w-full px-3 py-2.5 border border-gray-300 text-sm font-body font-light text-charcoal bg-white focus:border-gold focus:outline-none transition-colors cursor-pointer"
-                />
-              </div>
-              <div>
-                <label className="block text-[10px] tracking-luxe uppercase font-body font-medium text-charcoal mb-2">
-                  Time
-                </label>
-                <select className="w-full px-3 py-2.5 border border-gray-300 text-sm font-body font-light text-charcoal bg-white focus:border-gold focus:outline-none transition-colors appearance-none cursor-pointer">
-                  <option>Select time</option>
-                  <option>9:00 AM</option>
-                  <option>9:30 AM</option>
-                  <option>10:00 AM</option>
-                  <option>10:30 AM</option>
-                  <option>11:00 AM</option>
-                  <option>11:30 AM</option>
-                  <option>12:00 PM</option>
-                  <option>12:30 PM</option>
-                  <option>1:00 PM</option>
-                  <option>1:30 PM</option>
-                  <option>2:00 PM</option>
-                  <option>2:30 PM</option>
-                  <option>3:00 PM</option>
-                  <option>3:30 PM</option>
-                  <option>4:00 PM</option>
-                  <option>4:30 PM</option>
-                  <option>5:00 PM</option>
-                  <option>5:30 PM</option>
-                  <option>6:00 PM</option>
-                  <option>6:30 PM</option>
-                  <option>7:00 PM</option>
-                  <option>7:30 PM</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-[10px] tracking-luxe uppercase font-body font-medium text-charcoal mb-2">
-                  Phone
-                </label>
-                <input
-                  type="tel"
-                  placeholder="Your phone"
-                  className="w-full px-3 py-2.5 border border-gray-300 text-sm font-body font-light text-charcoal bg-white focus:border-gold focus:outline-none transition-colors placeholder:text-gray-400"
-                />
+          {/* CTA row */}
+          <div className="p-6 md:p-8 pt-5 border-t border-gray-100">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="flex flex-wrap items-center gap-4 text-xs text-warm-gray font-body font-light">
+                <span className="flex items-center gap-1.5">
+                  <Clock size={12} className="text-gold" /> Mon-Thu: 9AM-8PM
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Clock size={12} className="text-gold" /> Fri: 9AM-6PM
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <Clock size={12} className="text-gold" /> Sat: 9AM-3PM
+                </span>
+                <a href="tel:919-951-7866" className="flex items-center gap-1.5 hover:text-gold transition-colors">
+                  <Phone size={12} className="text-gold" /> (919) 951-7866
+                </a>
               </div>
               <button
                 onClick={handleBookNow}
-                className="w-full px-6 py-2.5 bg-charcoal text-white text-xs tracking-elegant uppercase font-body font-medium hover:bg-gold transition-all duration-300"
+                className="shrink-0 px-10 py-3 bg-charcoal text-white text-xs tracking-elegant uppercase font-body font-medium hover:bg-gold transition-all duration-300"
               >
                 Book Now
               </button>
