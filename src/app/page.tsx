@@ -405,7 +405,7 @@ function SeeOurWorkSection() {
           {Array.from({ length: 25 }, (_, i) => (
             <div
               key={i}
-              className="relative shrink-0 w-48 sm:w-56 md:w-64 aspect-[3/4] overflow-hidden snap-center group"
+              className="relative shrink-0 w-52 sm:w-60 md:w-72 aspect-[2/3] overflow-hidden snap-center group"
             >
               <Image
                 src={`/hair-pic${i + 1}.png`}
@@ -632,8 +632,19 @@ export default function Home() {
       {/* Book Your Service - Sleek Modern Widget */}
       <BookingWidget />
 
+      {/* Elegant Divider */}
+      <div className="py-10 bg-white flex items-center justify-center">
+        <div className="flex items-center gap-4 max-w-xs w-full">
+          <div className="flex-1 h-px bg-gradient-to-r from-transparent to-gold/30" />
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="#c9a96e" strokeWidth="1" className="shrink-0 opacity-60">
+            <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8l-6.2 4.5 2.4-7.4L2 9.4h7.6z" />
+          </svg>
+          <div className="flex-1 h-px bg-gradient-to-l from-transparent to-gold/30" />
+        </div>
+      </div>
+
       {/* About Section */}
-      <section className="py-24 bg-white">
+      <section className="py-16 bg-white">
         <div
           ref={about.ref}
           className={`max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center transition-all duration-1000 ${
