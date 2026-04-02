@@ -261,7 +261,7 @@ export default function ChatWidget() {
 
       {/* Chat Window */}
       <div
-        className={`fixed bottom-24 right-4 sm:right-6 z-30 w-[calc(100vw-2rem)] sm:w-96 max-h-[70vh] bg-white rounded-xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden transition-all duration-300 origin-bottom-right ${
+        className={`fixed bottom-24 right-3 sm:right-6 z-30 w-[calc(100vw-1.5rem)] sm:w-96 max-h-[60vh] sm:max-h-[70vh] bg-white rounded-xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden transition-all duration-300 origin-bottom-right ${
           isOpen ? "scale-100 opacity-100 pointer-events-auto" : "scale-95 opacity-0 pointer-events-none"
         }`}
       >
@@ -279,7 +279,7 @@ export default function ChatWidget() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 min-h-0" style={{ maxHeight: "calc(70vh - 140px)" }}>
+        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 min-h-0" style={{ maxHeight: "calc(60vh - 130px)" }}>
           {messages.map((msg, i) => (
             <div key={i} className={`flex gap-2.5 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
               {msg.role === "assistant" && (

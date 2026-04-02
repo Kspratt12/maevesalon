@@ -3,6 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Clock, MapPin, Phone, Sparkles, Palette, Scissors, Gem } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const Lightbox = dynamic(() => import("@/components/Lightbox"), { ssr: false });
 import { useEffect, useRef, useState } from "react";
 
 function useInView(threshold = 0.1) {
@@ -26,7 +29,7 @@ function useInView(threshold = 0.1) {
   return { ref, inView };
 }
 
-const stylists = [
+const hairStylists = [
   "Any Stylist",
   "Alexa Neal",
   "Anna Denton",
@@ -44,9 +47,10 @@ const stylists = [
   "Kirstin Allen",
   "Lindsey Widger",
   "Meghan Marple",
-  "Nails By Tess",
   "Sucel Toc",
 ];
+
+const nailStylist = ["Nails By Tess"];
 
 const serviceCategories: Record<string, { name: string; price: string }[]> = {
   "Cut & Style": [
@@ -302,18 +306,17 @@ function FAQSection() {
 function VideoCard({ src, stylist }: { src: string; stylist: string }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
   const [hasPreview, setHasPreview] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
-    // Force load first frame on mobile
     const handleLoaded = () => {
       video.currentTime = 0.1;
       setHasPreview(true);
     };
     video.addEventListener("loadeddata", handleLoaded);
-    // Fallback: try to load
     video.load();
     return () => video.removeEventListener("loadeddata", handleLoaded);
   }, []);
@@ -328,6 +331,14 @@ function VideoCard({ src, stylist }: { src: string; stylist: string }) {
       video.pause();
       setIsPlaying(false);
     }
+  };
+
+  const toggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setIsMuted(video.muted);
   };
 
   return (
@@ -346,7 +357,7 @@ function VideoCard({ src, stylist }: { src: string; stylist: string }) {
         controlsList="nodownload nofullscreen noremoteplayback"
         disablePictureInPicture
       />
-      {/* Loading placeholder until video preview loads */}
+      {/* Loading placeholder */}
       {!hasPreview && !isPlaying && (
         <div className="absolute inset-0 bg-gradient-to-br from-charcoal to-charcoal/80 flex items-center justify-center">
           <div className="text-center">
@@ -359,7 +370,7 @@ function VideoCard({ src, stylist }: { src: string; stylist: string }) {
           </div>
         </div>
       )}
-      {/* Play/Pause button overlay */}
+      {/* Play/Pause center overlay */}
       <div className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${isPlaying ? "opacity-0 hover:opacity-100" : hasPreview ? "opacity-100" : "opacity-0"}`}>
         <div className="w-16 h-16 rounded-full bg-gold/90 flex items-center justify-center group-hover:bg-gold group-hover:scale-110 transition-all duration-300 shadow-xl">
           {isPlaying ? (
@@ -374,6 +385,27 @@ function VideoCard({ src, stylist }: { src: string; stylist: string }) {
           )}
         </div>
       </div>
+      {/* Volume toggle - top right */}
+      {isPlaying && (
+        <button
+          onClick={toggleMute}
+          className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center hover:bg-black/70 transition-colors z-10"
+          aria-label={isMuted ? "Unmute" : "Mute"}
+        >
+          {isMuted ? (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <line x1="23" y1="9" x2="17" y2="15" />
+              <line x1="17" y1="9" x2="23" y2="15" />
+            </svg>
+          ) : (
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+              <path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07" />
+            </svg>
+          )}
+        </button>
+      )}
       {/* Stylist tag */}
       <div className="absolute bottom-3 left-3 right-3">
         <span className="text-[10px] font-body font-medium text-white bg-black/50 backdrop-blur-sm px-3 py-1.5 rounded-full">
@@ -384,8 +416,11 @@ function VideoCard({ src, stylist }: { src: string; stylist: string }) {
   );
 }
 
+const allHairPics = Array.from({ length: 29 }, (_, i) => `/hair-pic${i + 1}.png`);
+
 function SeeOurWorkSection() {
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const scroll = (direction: "left" | "right") => {
     const container = scrollRef.current;
@@ -430,17 +465,18 @@ function SeeOurWorkSection() {
           className="flex gap-2 overflow-x-auto pb-4 px-12 sm:px-16 snap-x snap-mandatory scrollbar-hide"
           style={{ scrollbarWidth: "none" }}
         >
-          {Array.from({ length: 25 }, (_, i) => (
+          {allHairPics.map((pic, i) => (
             <div
               key={i}
-              className="relative shrink-0 w-52 sm:w-60 md:w-72 aspect-[2/3] overflow-hidden snap-center group"
+              className="relative shrink-0 w-52 sm:w-60 md:w-72 aspect-[2/3] overflow-hidden snap-center group cursor-pointer"
+              onClick={() => setLightboxIndex(i)}
             >
               <Image
-                src={`/hair-pic${i + 1}.png`}
+                src={pic}
                 alt={`Hair style ${i + 1}`}
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700"
-                sizes="256px"
+                sizes="288px"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500" />
             </div>
@@ -451,6 +487,15 @@ function SeeOurWorkSection() {
         <div className="absolute left-0 top-0 bottom-4 w-12 bg-gradient-to-r from-cream to-transparent pointer-events-none" />
         <div className="absolute right-0 top-0 bottom-4 w-12 bg-gradient-to-l from-cream to-transparent pointer-events-none" />
       </div>
+
+      {/* Lightbox */}
+      {lightboxIndex !== null && (
+        <Lightbox
+          images={allHairPics}
+          initialIndex={lightboxIndex}
+          onClose={() => setLightboxIndex(null)}
+        />
+      )}
     </section>
   );
 }
@@ -530,7 +575,7 @@ function BookingWidget() {
                     Select Stylist
                   </label>
                   <select className="px-4 py-2.5 border border-gray-300 text-sm font-body font-light text-charcoal bg-white focus:border-gold focus:outline-none transition-colors min-w-[180px]">
-                    {stylists.map((s) => (
+                    {(activeTab === "Nails" ? nailStylist : hairStylists).map((s) => (
                       <option key={s} value={s}>{s === "Any Stylist" ? "Any stylist" : s}</option>
                     ))}
                   </select>
