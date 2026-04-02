@@ -247,39 +247,41 @@ export default function ChatWidget() {
       {/* Chat Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-30 w-14 h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
-          isOpen ? "bg-gold-dark rotate-0" : "bg-gold hover:bg-gold-dark hover:scale-110"
+        className={`fixed bottom-5 right-5 z-30 w-12 h-12 sm:w-14 sm:h-14 rounded-full shadow-lg flex items-center justify-center transition-all duration-300 ${
+          isOpen ? "bg-gold-dark" : "bg-gold hover:bg-gold-dark"
         }`}
         aria-label={isOpen ? "Close chat" : "Open chat"}
       >
         {isOpen ? (
-          <X size={22} className="text-white" />
+          <X size={20} className="text-white" />
         ) : (
-          <MessageCircle size={22} className="text-white" />
+          <MessageCircle size={20} className="text-white" />
         )}
       </button>
 
-      {/* Chat Window */}
-      <div
-        className={`fixed bottom-24 right-3 sm:right-6 z-30 w-[calc(100vw-1.5rem)] sm:w-96 max-h-[60vh] sm:max-h-[70vh] bg-white rounded-xl shadow-2xl border border-gray-100 flex flex-col overflow-hidden transition-all duration-300 origin-bottom-right ${
-          isOpen ? "scale-100 opacity-100 pointer-events-auto" : "scale-95 opacity-0 pointer-events-none"
-        }`}
-      >
-        {/* Header */}
-        <div className="bg-gold px-5 py-4 flex items-center gap-3 shrink-0">
-          <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
-            <Bot size={16} className="text-white" />
+      {/* Chat Window - fullscreen on mobile, card on desktop */}
+      {isOpen && (
+        <div className="fixed inset-0 sm:inset-auto sm:bottom-20 sm:right-5 z-30 sm:w-96 sm:h-[500px] sm:rounded-xl bg-white sm:shadow-2xl sm:border sm:border-gray-100 flex flex-col overflow-hidden">
+          {/* Header */}
+          <div className="bg-gold px-5 py-4 flex items-center justify-between shrink-0">
+            <div className="flex items-center gap-3">
+              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                <Bot size={16} className="text-white" />
+              </div>
+              <div>
+                <h3 className="text-white text-sm font-body font-medium">Maeve Assistant</h3>
+                <p className="text-white/60 text-[10px] font-body font-light">
+                  {AI_CONFIG.enabled ? "AI Powered" : "Ask us anything"}
+                </p>
+              </div>
+            </div>
+            <button onClick={() => setIsOpen(false)} className="sm:hidden w-8 h-8 rounded-full bg-white/20 flex items-center justify-center" aria-label="Close">
+              <X size={16} className="text-white" />
+            </button>
           </div>
-          <div>
-            <h3 className="text-white text-sm font-body font-medium">Maeve Assistant</h3>
-            <p className="text-white/50 text-[10px] font-body font-light">
-              {AI_CONFIG.enabled ? "AI Powered" : "Ask us anything"}
-            </p>
-          </div>
-        </div>
 
-        {/* Messages */}
-        <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4 min-h-0" style={{ maxHeight: "calc(60vh - 130px)" }}>
+          {/* Messages */}
+          <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
           {messages.map((msg, i) => (
             <div key={i} className={`flex gap-2.5 ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
               {msg.role === "assistant" && (
@@ -318,30 +320,31 @@ export default function ChatWidget() {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input */}
-        <div className="border-t border-gray-100 px-4 py-3 shrink-0">
-          <form
-            onSubmit={(e) => { e.preventDefault(); sendMessage(); }}
-            className="flex items-center gap-2"
-          >
-            <input
-              ref={inputRef}
-              type="text"
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder="Ask about services, pricing, booking..."
-              className="flex-1 px-3 py-2.5 text-sm font-body font-light text-charcoal bg-gray-50 rounded-lg border-0 focus:outline-none focus:ring-1 focus:ring-gold/30 placeholder:text-gray-400"
-            />
-            <button
-              type="submit"
-              disabled={!input.trim() || isTyping}
-              className="w-9 h-9 rounded-lg bg-gold flex items-center justify-center hover:bg-gold-dark transition-colors disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
+          {/* Input */}
+          <div className="border-t border-gray-100 px-4 py-3 shrink-0 pb-safe">
+            <form
+              onSubmit={(e) => { e.preventDefault(); sendMessage(); }}
+              className="flex items-center gap-2"
             >
-              <Send size={15} className="text-white" />
-            </button>
-          </form>
+              <input
+                ref={inputRef}
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Ask about services, pricing..."
+                className="flex-1 px-3 py-2.5 text-sm font-body font-light text-charcoal bg-gray-50 rounded-lg border-0 focus:outline-none focus:ring-1 focus:ring-gold/30 placeholder:text-gray-400"
+              />
+              <button
+                type="submit"
+                disabled={!input.trim() || isTyping}
+                className="w-9 h-9 rounded-lg bg-gold flex items-center justify-center hover:bg-gold-dark transition-colors disabled:opacity-40 disabled:cursor-not-allowed shrink-0"
+              >
+                <Send size={15} className="text-white" />
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
+      )}
     </>
   );
 }

@@ -49,9 +49,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`h-full antialiased ${cormorant.variable} ${montserrat.variable} ${playfair.variable}`}>
-      <body className="min-h-full flex flex-col font-body overflow-x-hidden w-full">
+      <body className="min-h-full flex flex-col font-body overflow-x-hidden">
         <Navbar />
-        <main className="flex-1 overflow-x-hidden">{children}</main>
+        <main className="flex-1 overflow-x-hidden w-full">{children}</main>
         <Footer />
         <ChatWidget />
       </body>
